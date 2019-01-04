@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Git flow for Guidepoint Now app</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.15.0/gitgraph.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <canvas id="gitGraph"></canvas>
+        <button class="btn btn-primary" id="mergeQa">Merge QA branch into the master</button>
+
+        <h2>General</h2>
+        <ul>
+            <li>All feature branches are created off the master branch.</li>
+            <li>Techincal tasks that do not require QA (i.e., unit tests, README updates, etc...) are always merged directly
+                into the master branch.</li>
+            <li>Feature branches that are non-technical tasks, can be merged directly into master after QA approval, or via the optional QA branch.</li>
+            <li>Releases are marked using <b>release tags</b> in the master branch.</li>
+            <li>Rebasing is favored over merging.</li>
+            <li>QA/feature branches are merged into master via pull requests. <b>Squash and merge</b> strategy is used to merge the branches.</li>
+        </ul>
+
+        <h2>QA branch</h2>
+        <ul>
+            <li>Is optional and is created off the master branch</li>
+            <li>Is used in cases where multiple feature branches need to be tested in unison prior to release.</li>
+            <li>Will be deleted after being merged into the master branch.</li>
+            <li>Will have feature branches merged into it via pull requests (squash and merge strategy is used).</li>
+        </ul>
+
+        <h2>Releases</h2>
+        <ul>
+            <li>All feature branches must be rebased with master after a new release tag is created.</li>
+            <li>Release tags are used for build/deploy jobs (i.e., Jenkins).</li>
+        </ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gitgraph.js/1.15.0/gitgraph.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
