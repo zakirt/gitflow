@@ -62,6 +62,9 @@
 
     const mergeQaBtn = document.getElementById('mergeQa');
     mergeQaBtn.addEventListener('click', () => {
+        if (commitCount++) {
+            return;
+        }
         qa.merge(master, {
             dotColor: 'red'
         }).delete();
