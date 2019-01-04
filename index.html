@@ -18,12 +18,21 @@
         <h2>General</h2>
         <ul>
             <li>All feature branches are created off the master branch.</li>
-            <li>Techincal tasks that do not require QA (i.e., unit tests, README updates, etc...) are always merged directly
-                into the master branch.</li>
-            <li>Feature branches that are non-technical tasks, can be merged directly into master after QA approval, or via the optional QA branch.</li>
             <li>Releases are marked using <b>release tags</b> in the master branch.</li>
             <li>Rebasing is favored over merging.</li>
             <li>QA/feature branches are merged into master via pull requests. <b>Squash and merge</b> strategy is used to merge the branches.</li>
+            <li><a href="https://semver.org/" target="_blank">Semantic versioning</a> is used for naming release tags.
+                <pre>Ex. v1.0.0</pre></li>
+        </ul>
+
+        <h2>Feature branches</h2>
+        <ul>
+            <li>Are created off the master branch.</li>
+            <li>Are merged into master, or into a temporary qa branch.</li>
+            <li>Are always merged directly into master if they contain technical tasks that do not require QA (i.e., unit tests, README updates, etc...).</li>
+            <li>Are deleted after being merged into master.</li>
+            <li>Are rebased with latest master if master is updated.</li>
+            <li>Are code reviewed for code quality and functionality prior to being merged into QA branch.</li>
         </ul>
 
         <h2>QA branch</h2>
@@ -32,6 +41,13 @@
             <li>Is used in cases where multiple feature branches need to be tested in unison prior to release.</li>
             <li>Will be deleted after being merged into the master branch.</li>
             <li>Will have feature branches merged into it via pull requests (squash and merge strategy is used).</li>
+        </ul>
+
+        <h2>Testing</h2>
+        <ul>
+            <li>Testing occurs in the QA branch.</li>
+            <li>On failure, a new hot fix branch is created off QA branch. The branch will have the name of the feature followed by <b>-hotfix</b>.
+                <br> <pre>Ex. feature-hotfix</pre></li>
         </ul>
 
         <h2>Releases</h2>
