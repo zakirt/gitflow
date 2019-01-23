@@ -1,0 +1,54 @@
+<canvas id="gitGraph"></canvas>
+<p>
+    <button class="btn btn-primary" id="merge-feature">Merge feature branch into develop</button>
+    <button class="btn btn-primary" id="merge-develop">Merge develop into master</button>
+</p>
+
+<h2>General</h2>
+<ul>
+    <li>All feature branches are created off the develop branch.</li>
+    <li>Releases are marked using <b>release tags</b> and release branches.</li>
+    <li>Rebasing is favored over merging.</li>
+    <li>Feature branches are merged into develop via pull requests. <b>Squash and merge</b> strategy is used to merge
+        the branches.</li>
+    <li><a href="https://semver.org/" target="_blank">Semantic versioning</a> is used for naming release tags and
+        release branches.
+        <pre>Ex. v1.0.0</pre>
+    </li>
+    <li>Hotfix branch is created off master and then merged directly into master. The develop branch is then rebased
+        with master. Feature branches are rebased with develop.</li>
+</ul>
+
+<h2>Feature branches</h2>
+<ul>
+    <li>Are created off the develop branch.</li>
+    <li>Are merged into develop.</li>
+    <li>Are deleted after being merged into develop.</li>
+    <li>Are rebased with latest develop if develop branch is updated.</li>
+    <li>Are code reviewed for code quality and functionality prior to being merged into develop branch.</li>
+</ul>
+
+<h2>The develop branch</h2>
+<ul>
+    <li>Is used for testing by QA prior to release.</li>
+    <li>Will have feature branches merged into it via pull requests (squash and merge strategy is used).</li>
+</ul>
+
+<h2>Testing</h2>
+<ul>
+    <li>Testing occurs in the develop branch.</li>
+    <li>On failure, the feature branch causing the issue needs to be rebased with the latest develop branch. Then
+        merged back into develop after the issue is fixed.</li>
+</ul>
+
+<h2>Releases</h2>
+<ul>
+    <li>All feature branches must be rebased with develop after a new release tag is created.</li>
+    <li>Release tags are used for build/deploy jobs (i.e., Jenkins).</li>
+</ul>
+
+<h2>Additional resources</h2>
+<ul>
+    <li><a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow" target="_blank">Git
+            workflow tutorial (Atlassian)</a></li>
+</ul>

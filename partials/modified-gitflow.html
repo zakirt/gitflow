@@ -1,0 +1,49 @@
+<canvas id="gitGraph"></canvas>
+<p>
+    <button class="btn btn-primary" id="merge-feature">Merge feature branch into QA</button>
+    <button class="btn btn-primary" id="merge-qa">Merge QA branch into master</button>
+</p>
+
+<h2>General</h2>
+<ul>
+    <li>All feature branches are created off the master branch.</li>
+    <li>Releases are marked using <b>release tags</b> in the master branch.</li>
+    <li>Rebasing is favored over merging.</li>
+    <li>QA/feature branches are merged into master via pull requests. <b>Squash and merge</b> strategy is used to merge
+        the branches.</li>
+    <li><a href="https://semver.org/" target="_blank">Semantic versioning</a> is used for naming release tags.
+        <pre>Ex. v1.0.0</pre>
+    </li>
+</ul>
+
+<h2>Feature branches</h2>
+<ul>
+    <li>Are created off the master branch.</li>
+    <li>Are merged into master, or into a temporary qa branch.</li>
+    <li>Are always merged directly into master if they contain technical tasks that do not require QA (i.e., unit
+        tests, README updates, etc...).</li>
+    <li>Are deleted after being merged into master.</li>
+    <li>Are rebased with latest master if master is updated.</li>
+    <li>Are code reviewed for code quality and functionality prior to being merged into QA branch.</li>
+</ul>
+
+<h2>QA branch</h2>
+<ul>
+    <li>Is optional and is created off the master branch</li>
+    <li>Is used in cases where multiple feature branches need to be tested in unison prior to release.</li>
+    <li>Will be deleted after being merged into the master branch.</li>
+    <li>Will have feature branches merged into it via pull requests (squash and merge strategy is used).</li>
+</ul>
+
+<h2>Testing</h2>
+<ul>
+    <li>Testing occurs in the QA branch.</li>
+    <li>On failure, the feature branch causing the issue needs to be rebased with the latest QA branch. Then merged
+        back into QA after the issue is fixed.</li>
+</ul>
+
+<h2>Releases</h2>
+<ul>
+    <li>All feature branches must be rebased with master after a new release tag is created.</li>
+    <li>Release tags are used for build/deploy jobs (i.e., Jenkins).</li>
+</ul>

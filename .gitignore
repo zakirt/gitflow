@@ -331,3 +331,5 @@ ASALocalRun/
 
 # MAC OSX
 .DS_Store
+
+package-lock.json
