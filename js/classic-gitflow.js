@@ -17,12 +17,6 @@ window.initClassicGitFlow = () => {
     const develop = graph.branch('develop');    // New branch from HEAD
     let commitCount = 0;
 
-    const hotfix = graph.branch({
-        parentBranch: develop,
-        name: 'hotfix',
-        column: 2             // which column index it should be displayed in
-    });
-
     master.checkout();
     const feature1 = graph.branch('feature1');
 
@@ -55,6 +49,7 @@ window.initClassicGitFlow = () => {
 
     const mergeFeatureBtn = document.getElementById('merge-feature');
     const mergeDevelopBtn = document.getElementById('merge-develop');
+    const createHotfixBtn = document.getElementById('create-hotfix');
     let isReadyForRelease = false;
     mergeDevelopBtn.setAttribute('disabled', true);
 
@@ -86,5 +81,38 @@ window.initClassicGitFlow = () => {
             isReadyForRelease = false;
             mergeDevelopBtn.setAttribute('disabled', true);
         }
+    });
+
+    let isHotfixReleased = false;
+    createHotfixBtn.addEventListener('click', () => {
+        if (isHotfixReleased) {
+            return;
+        }
+
+        const hotfix = graph.branch({
+            parentBranch: master,
+            name: `hotfix-v1.0.${releaseCount}`,
+            column: 2             // which column index it should be displayed in
+        });
+        hotfix.commit({
+            dotColor: 'orange',
+            message: `Hotfix for prod bug found in release v1.0.${releaseCount}`
+        });
+        hotfix.merge(master, {
+            dotColor: 'red'
+        });
+
+        releaseCount++;
+        master.commit({
+            dotColor: 'gold',
+            message: `Release v1.0.${releaseCount}`,
+            tag: `v1.0.${releaseCount}`
+        });
+        master.merge(develop, {
+            dotColor: '#71FF33',
+            message: `Merge master branch - release v1.0.${releaseCount}`
+        });
+        isHotfixReleased = true;
+        createHotfixBtn.setAttribute('disabled', true);
     });
 };
