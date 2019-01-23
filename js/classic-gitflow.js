@@ -54,15 +54,17 @@ window.initClassicGitFlow = () => {
     mergeDevelopBtn.setAttribute('disabled', true);
 
     mergeFeatureBtn.addEventListener('click', () => {
-        if (clickMergeCount < featureBranches.length) {
-            const feature = featureBranches[clickMergeCount++];
-            feature.branch.merge(develop, {
-                dotColor: feature.dotColor
-            });
-            if (mergeDevelopBtn.getAttribute('disabled')) {
-                mergeDevelopBtn.removeAttribute('disabled');
-                isReadyForRelease = true;
-            }
+        const feature = featureBranches[clickMergeCount++];
+        feature.branch.merge(develop, {
+            dotColor: feature.dotColor
+        });
+        if (mergeDevelopBtn.getAttribute('disabled')) {
+            mergeDevelopBtn.removeAttribute('disabled');
+            isReadyForRelease = true;
+        }
+        if (clickMergeCount >= featureBranches.length) {
+            mergeFeatureBtn.setAttribute('disabled', true);
+            return;
         }
     });
 
