@@ -7,7 +7,7 @@ window.initModifiedGitFlow = () => {
     });
     const master = graph.branch('master');
     master.commit().commit({
-        dotColor:'gold',
+        dotColor: 'gold',
         message: 'Release v1.0.0',
         tag: 'v1.0.0'
     }).commit({
@@ -68,7 +68,7 @@ window.initModifiedGitFlow = () => {
                 dotColor: 'red'
             }).delete();
             master.commit({
-                dotColor:'gold',
+                dotColor: 'gold',
                 message: `Release v1.1.${releaseCount}`,
                 tag: `v1.1.${releaseCount}`
             });
@@ -97,15 +97,17 @@ window.initModifiedGitFlow = () => {
         dotColor: '#33FF00'
     }];
     mergeFeatureBtn.addEventListener('click', () => {
-        if (clickMergeCount < featureBranches.length) {
-            const feature = featureBranches[clickMergeCount++];
-            feature.branch.merge(qa, {
-                dotColor: feature.dotColor
-            });
-            if (mergeQaBtn.getAttribute('disabled')) {
-                mergeQaBtn.removeAttribute('disabled');
-                isReadyForRelease = true;
-            }
+        const feature = featureBranches[clickMergeCount++];
+        feature.branch.merge(qa, {
+            dotColor: feature.dotColor
+        });
+        if (mergeQaBtn.getAttribute('disabled')) {
+            mergeQaBtn.removeAttribute('disabled');
+            isReadyForRelease = true;
+        }
+        if (clickMergeCount >= featureBranches.length) {
+            mergeFeatureBtn.setAttribute('disabled', true);
+            return;
         }
     });
 };
