@@ -1,4 +1,6 @@
 window.initModifiedGitFlow = () => {
+    'use strict';
+
     const graph = new GitGraph({
         template: 'blackarrow',
         reverseArrow: false,
@@ -78,7 +80,6 @@ window.initModifiedGitFlow = () => {
             feature3.delete();
             qa.delete();
             master.checkout();
-            isReadyForRelease = false;
             isReadyForRelease = false;
             mergeQaBtn.setAttribute('disabled', true);
         }
